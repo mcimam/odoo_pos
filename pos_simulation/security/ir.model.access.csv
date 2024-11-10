@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_pos_simulation_user,pos.simulation user,model_pos_simulation,,1,1,1,1
-access_pos_simulation_product_user,pos.simulation_product user,model_pos_simulation_product,,1,1,1,1
