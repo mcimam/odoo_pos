@@ -8,6 +8,7 @@
     "data": [
         "security/ir.model.access.csv",
         "views/pos_simulation_views.xml",
+        "views/menu.xml",
     ],
     'icon': 'ci_pos_simulation/static/description/icon.png',
     "license": "LGPL-3",

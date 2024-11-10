@@ -83,8 +83,5 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-        <!-- Menu for POS Simulation -->
-        <menuitem id="menu_pos_simulation_root" name="POS Simulation" sequence="10"/>
-        <menuitem id="menu_pos_simulation" name="Simulations" parent="menu_pos_simulation_root" action="action_pos_simulation"/>
     </data>
 </odoo>
