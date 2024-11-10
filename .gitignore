@@ -1,0 +1,72 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.manifest
+*.spec
+
+# Odoo specific
+addons/*/static/*
+*.log
+*.pot
+*.pyc
+*.swp
+.odoo_serverrc
+*.xlsx
+*.xls
+
+# Testing / coverage
+.coverage
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+nosetests.xml
+coverage/
+.cache
+junit.xml
+*.mo
+*.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Odoo modules
+addons/*/__pycache__/
+addons/*/node_modules/
+addons/*/bower_components/
+addons/*/dist/
+addons/*/lib/
+addons/*/tmp/
+
+# Editor / IDE specific
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.iml
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
