@@ -1,6 +1,6 @@
 {
     "name": "POS Simulation",
-    "version": "17.0.1.0",
+    "version": "17.0.1.0.1",
     "summary": "Module to simulate Point of Sales sessions and orders",
     "category": "Point of Sale",
     "author": "Mcimam, Sedari Coffee",

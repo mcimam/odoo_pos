@@ -22,6 +22,8 @@ class POSSimulation(models.Model):
     max_items_per_order = fields.Integer(string="Maximum Items per Order", required=True)
 
     min_daily_revenue = fields.Float(string="Minimum Daily Revenue", required=True)
+    max_daily_revenue = fields.Float(string="Maximum Daily Revenue", required=True)
+
     opening_cashbox = fields.Float(string="Opening Cashbox Amount", required=True)
 
     product_ids = fields.One2many("pos.simulation.product", "simulation_id", "Products")
@@ -159,7 +161,10 @@ class POSSimulation(models.Model):
             raise exceptions.ValidationError("Product is empty")
 
         if self.min_items_per_order > self.max_items_per_order:
-            raise exceptions.ValidationError("Min Item per Order is less tham Max Item per order")
+            raise exceptions.ValidationError("Min item per Order is more than Max Item per order")
+
+        if self.min_daily_revenue > self.max_daily_revenue:
+            raise exceptions.ValidationError("Min revenue is more than Max revenue")
 
         user_tz = pytz.timezone(self.env.user.tz) if self.env.user.tz else pytz.UTC
         for simulation in self:
@@ -188,6 +193,10 @@ class POSSimulation(models.Model):
 
                     # Update daily revenue with random amount for simplicity
                     daily_revenue += (sum(order.mapped(lambda x: x.margin)) or 0)
+
+                    # We just estimate next run
+                    if daily_revenue + (sum(order.mapped(lambda x: x.margin)) or 0) > simulation.max_daily_revenue:
+                        break
 
                 # Close session at 9 PM in user's timezone
                 close_time = datetime.combine(current_date, datetime.min.time()) + timedelta(hours=21)

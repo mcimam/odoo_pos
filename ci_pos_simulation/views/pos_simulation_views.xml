@@ -29,7 +29,7 @@
                                 <field name="min_items_per_order"/>
                                 <field name="max_items_per_order"/>
                                 <field name="min_daily_revenue"/>
-                                <!-- <field name="max_daily_revenue"/> -->
+                                <field name="max_daily_revenue"/>
                             </group>
                         </group>
                         <notebook>
