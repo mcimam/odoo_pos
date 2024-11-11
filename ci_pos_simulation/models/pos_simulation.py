@@ -4,7 +4,7 @@ import logging
 import pytz
 
 from datetime import datetime, timedelta
-from odoo import models, fields
+from odoo import models, fields, exceptions
 
 _logger = logging.getLogger(__name__)
 
@@ -110,6 +110,9 @@ class POSSimulation(models.Model):
 
         order_name = "Order " + str(uuid.uuid4())
 
+        # Select cash payment method
+        payment_method_id = self.env['pos.payment.method'].search([('name', '=', 'Cash')], limit=1).id or 1
+
         order_data = {
             "id": str(uuid.uuid4()),
             "data": {
@@ -123,7 +126,7 @@ class POSSimulation(models.Model):
                     [0, 0,
                         {
                             "name": order_time.strftime("%Y-%m-%d %H:%M:%S"),
-                            "payment_method_id": self.env.ref("point_of_sale.payment_method").id,  # Select cash method
+                            "payment_method_id": payment_method_id,
                             "amount": total_amount,
                         },
                      ]
@@ -152,6 +155,12 @@ class POSSimulation(models.Model):
         return orders
 
     def simulate_orders(self):
+        if not self.product_ids:
+            raise exceptions.ValidationError("Product is empty")
+
+        if self.min_items_per_order > self.max_items_per_order:
+            raise exceptions.ValidationError("Min Item per Order is less tham Max Item per order")
+
         user_tz = pytz.timezone(self.env.user.tz) if self.env.user.tz else pytz.UTC
         for simulation in self:
             current_date = simulation.start_date
